@@ -60,9 +60,10 @@ extension SModal {
 }
 ```
 First of all in every project I would extend `SModal` to return `true` under `shouldMakeKey` thanks to that our window will become keyWindow and will receive system events.
-```swift
+
 Second thing you can adjust is `SModalPresentation`. your Controller can be dismiss by `SWindow` if you return `true` under `canDismiss`. Thanks to this parameter what ever will pop in to queue and the current presented controller will  be return positive value under this flag `SWindow` will dismiss it and present next one from the queue.
-extension SModalPresentation {    
+```swift
+extension YourController {    
     public var canDismiss: Bool {
         return false
     }
