@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		62A735B41EDDA1CA008174F2 /* SWindow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A735AA1EDDA1CA008174F2 /* SWindow.framework */; };
 		62A735B91EDDA1CA008174F2 /* SWindowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A735B81EDDA1CA008174F2 /* SWindowTests.swift */; };
-		62A735BB1EDDA1CA008174F2 /* SWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 62A735AD1EDDA1CA008174F2 /* SWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		62A735C51EDDA231008174F2 /* SWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A735C41EDDA231008174F2 /* SWindow.swift */; };
+		62A735CC1EDE4CA0008174F2 /* SWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 62A735C91EDE4CA0008174F2 /* SWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		62A735CD1EDE4CA0008174F2 /* SWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A735CA1EDE4CA0008174F2 /* SWindow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,12 +25,12 @@
 
 /* Begin PBXFileReference section */
 		62A735AA1EDDA1CA008174F2 /* SWindow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SWindow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		62A735AD1EDDA1CA008174F2 /* SWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWindow.h; sourceTree = "<group>"; };
-		62A735AE1EDDA1CA008174F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62A735B31EDDA1CA008174F2 /* SWindowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SWindowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		62A735B81EDDA1CA008174F2 /* SWindowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWindowTests.swift; sourceTree = "<group>"; };
 		62A735BA1EDDA1CA008174F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		62A735C41EDDA231008174F2 /* SWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWindow.swift; sourceTree = "<group>"; };
+		62A735C81EDE4CA0008174F2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		62A735C91EDE4CA0008174F2 /* SWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWindow.h; sourceTree = "<group>"; };
+		62A735CA1EDE4CA0008174F2 /* SWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWindow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +55,7 @@
 		62A735A01EDDA1CA008174F2 = {
 			isa = PBXGroup;
 			children = (
-				62A735AC1EDDA1CA008174F2 /* SWindow */,
+				62A735C71EDE4CA0008174F2 /* Sources */,
 				62A735B71EDDA1CA008174F2 /* SWindowTests */,
 				62A735AB1EDDA1CA008174F2 /* Products */,
 			);
@@ -70,16 +70,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		62A735AC1EDDA1CA008174F2 /* SWindow */ = {
-			isa = PBXGroup;
-			children = (
-				62A735AD1EDDA1CA008174F2 /* SWindow.h */,
-				62A735AE1EDDA1CA008174F2 /* Info.plist */,
-				62A735C41EDDA231008174F2 /* SWindow.swift */,
-			);
-			path = SWindow;
-			sourceTree = "<group>";
-		};
 		62A735B71EDDA1CA008174F2 /* SWindowTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +79,16 @@
 			path = SWindowTests;
 			sourceTree = "<group>";
 		};
+		62A735C71EDE4CA0008174F2 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				62A735C81EDE4CA0008174F2 /* Info.plist */,
+				62A735C91EDE4CA0008174F2 /* SWindow.h */,
+				62A735CA1EDE4CA0008174F2 /* SWindow.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -96,7 +96,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62A735BB1EDDA1CA008174F2 /* SWindow.h in Headers */,
+				62A735CC1EDE4CA0008174F2 /* SWindow.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,7 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62A735C51EDDA231008174F2 /* SWindow.swift in Sources */,
+				62A735CD1EDE4CA0008174F2 /* SWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,7 +336,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SWindow/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -358,7 +358,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SWindow/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

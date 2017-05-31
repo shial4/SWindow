@@ -23,7 +23,7 @@ public enum SModalStatus {
 }
 
 public class SModal {
-    public static let modalWindow: UIWindow = {
+    static let modalWindow: UIWindow = {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.backgroundColor = .clear
         window.windowLevel = windowLevel
@@ -31,7 +31,7 @@ public class SModal {
         return window
     }()
     
-    public static var stack: [SModalPresentation] = []
+    static var stack: [SModalPresentation] = []
     
     public static var shouldMakeKey: Bool {
         return false
@@ -71,7 +71,7 @@ public protocol SModalPresentation: class, SModalStack {
 }
 
 extension SModalPresentation {
-    public var modalStatus: SModalStatus {
+    final var modalStatus: SModalStatus {
         if SModal.modalWindow.rootViewController === self {
             return .presented
         }
@@ -81,12 +81,12 @@ extension SModalPresentation {
         return .none
     }
     
-    public var canDismiss: Bool {
-        return false
+    final var stack: [SModalPresentation] {
+        return SModal.stack
     }
     
-    public var stack: [SModalPresentation] {
-        return SModal.stack
+    public var canDismiss: Bool {
+        return false
     }
     
     public var priority: SModalPriority {
