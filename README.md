@@ -1,9 +1,6 @@
 # SWindow
 
 <p align="center">
-    <img src="docs/logo.png" width="300" max-width="50%" alt="SWindow" />
-</p>
-<p align="center">
     <a href="https://raw.githubusercontent.com/shial4/SWindow/master/LICENSE">
         <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License" />
     </a>
@@ -21,8 +18,6 @@
 SWindow is an easy to use Swift windows manager. Don't spend hours writing your code to present and dismiss modal view controllers, stop wasting your time on debugging why your modal presentation disapear. Without issues, simple and safe present your controller!
 
 ## 💊 Usage
-```swift
-```
 **Basic Example**
 Make your controller conform to `SModalPresentation` protocol
 ```swift
