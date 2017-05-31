@@ -23,7 +23,7 @@ public enum SModalStatus {
 }
 
 public class SModal {
-    static let modalWindow: UIWindow = {
+    public static let modalWindow: UIWindow = {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.backgroundColor = .clear
         window.windowLevel = windowLevel
@@ -31,14 +31,30 @@ public class SModal {
         return window
     }()
     
-    static var stack: [SModalPresentation] = []
+    public static var stack: [SModalPresentation] = []
     
-    static var windowLevel: UIWindowLevel {
+    public static var shouldMakeKey: Bool {
+        return false
+    }
+    
+    public static var windowLevel: UIWindowLevel {
         return UIWindowLevelAlert - 1
     }
     
-    static var animationDuration: TimeInterval {
+    public static var animationDuration: TimeInterval {
         return 0.2
+    }
+    
+    fileprivate static func dropRootViewController() {
+        modalWindow.isHidden = true
+        modalWindow.rootViewController = nil
+        modalWindow.resignKey()
+    }
+    
+    fileprivate static func makeKey() {
+        if shouldMakeKey {
+            SModal.modalWindow.makeKey()
+        }
     }
 }
 
@@ -79,29 +95,29 @@ extension SModalPresentation {
 }
 
 extension SModalPresentation where Self: UIViewController {
-    func sReplace<T: UIViewController>(with controller: T, animated: Bool, completion: (() -> Void)?) where T: SModalPresentation {
+    public func sReplace<T: UIViewController>(with controller: T, animated: Bool = false, completion: (() -> Void)? = nil) where T: SModalPresentation {
         if animated {
             SModal.modalWindow.isHidden = false
             UIView.animate(withDuration: SModal.animationDuration, animations: {
                 SModal.modalWindow.rootViewController = controller
-                SModal.modalWindow.makeKey()
+                SModal.makeKey()
                 SModal.modalWindow.alpha = 1
             }, completion: { completed in
                 completion?()
             })
         } else {
             SModal.modalWindow.rootViewController = controller
-            SModal.modalWindow.makeKey()
+            SModal.makeKey()
             SModal.modalWindow.isHidden = false
             completion?()
         }
         
     }
     
-    func sPresent(animated: Bool, completion: (() -> Void)?) {
+    public func sPresent(animated: Bool = false, completion: (() -> Void)? = nil) {
         guard let currentPresented = SModal.modalWindow.rootViewController else {
             SModal.modalWindow.rootViewController = self
-            SModal.modalWindow.makeKey()
+            SModal.makeKey()
             if animated {
                 SModal.modalWindow.alpha = 0
                 SModal.modalWindow.isHidden = false
@@ -116,40 +132,39 @@ extension SModalPresentation where Self: UIViewController {
             }
             return
         }
-        if let sModalController = currentPresented as? Self, sModalController.canDismiss == true {
-            sModalController.sReplace(with: self, animated: animated, completion: completion)
+        SModal.stack.append(self)
+        if (currentPresented as? SModalPresentation)?.canDismiss == true {
+            (currentPresented as? SModalPresentation)?.sWithdraw(animated: animated, completion: completion)
         } else {
-            SModal.stack.append(self)
+            completion?()
         }
     }
     
-    func sWithdraw(animated: Bool, completion: (() -> Void)?) {
+    public func sWithdraw(animated: Bool = false, completion: (() -> Void)? = nil) {
+        func completedProcedure() {
+            if let controller = SModal.stack.sorted(by: {$0.priority > $1.priority}).first {
+                SModal.stack = SModal.stack.filter({ $0  !== controller })
+                controller.sPresent(animated: animated, completion: completion)
+            }else {
+                completion?()
+            }
+        }
+        
         if SModal.modalWindow.rootViewController === self {
             if animated {
                 SModal.modalWindow.alpha = 1
                 UIView.animate(withDuration: SModal.animationDuration, animations: {
                     SModal.modalWindow.alpha = 0
                 }, completion: { completed in
-                    SModal.modalWindow.isHidden = true
-                    completion?()
+                    SModal.dropRootViewController()
+                    completedProcedure()
                 })
             } else {
-                SModal.modalWindow.isHidden = true
-                completion?()
+                SModal.dropRootViewController()
+                completedProcedure()
             }
-            SModal.modalWindow.rootViewController = nil
-            SModal.modalWindow.resignKey()
         } else if SModal.stack.contains(where: { $0 === self }) {
             SModal.stack = SModal.stack.filter() { !($0 === self) }
         }
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + SModal.animationDuration) {
-            if let controller = SModal.stack.sorted(by: {$0.priority > $1.priority}).first {
-                SModal.stack.removeFirst()
-                controller.sPresent(animated: true, completion: nil)
-            }
-        }
     }
 }
-
-
-
