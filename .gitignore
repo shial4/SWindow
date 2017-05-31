@@ -1,7 +1,9 @@
 Packages
-*.xcodeproj
-Config/secrets
+
 *.pins
+
+## Breakpoints
+*.xcbkptlist
 
 ## Build generated
 .build
@@ -24,8 +26,10 @@ xcuserdata
 !*.xcodeproj/project.pbxproj
 
 ## Other
+*.xccheckout
 *.moved-aside
 *.xcuserstate
+*.xcscmblueprint
 
 ## Obj-C/Swift specific
 *.hmap
@@ -40,7 +44,7 @@ Packages/
 .build/
 
 # CocoaPods
-Pods/
+/Pods
 
 # Carthage
 Carthage/Checkouts
