@@ -4,6 +4,15 @@
 import PackageDescription
 
 let package = Package(
-    name: "SWindow"
+    name: "SWindow",
+    products: [
+        .library(
+            name: "SWindow",
+            targets: ["SWindow"]
+        )
+    ],
+    targets: [
+        .target(name: "SWindow")
+    ]
 )
 
