@@ -44,7 +44,7 @@ class SWindowTests: XCTestCase {
     }
     
     func testSModalDuration() {
-        XCTAssertEqualWithAccuracy(SModal.animationDuration, 0.2, accuracy: 0.01)
+        XCTAssertEqual(SModal.animationDuration, 0.2, accuracy: 0.01)
     }
     
     func testModalCanDismiss() {

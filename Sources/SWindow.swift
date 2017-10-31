@@ -106,7 +106,7 @@ public protocol SModalPresentation: class, SModalStack {
 // MARK: - Default implementation of Modal Presentation protocol
 extension SModalPresentation {
     /// Provide information about current status
-    final var modalStatus: SModalStatus {
+    var modalStatus: SModalStatus {
         if SModal.modalWindow.rootViewController === self {
             return .presented
         }
@@ -117,7 +117,7 @@ extension SModalPresentation {
     }
     
     /// Return SWindow stack
-    final var stack: [SModalPresentation] {
+    var stack: [SModalPresentation] {
         return SModal.stack
     }
     
