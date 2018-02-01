@@ -11,6 +11,6 @@ Pod::Spec.new do |s|
   s.social_media_url   = "https://twitter.com/shial_4"
   s.ios.deployment_target = "8.0"
   s.source       = { :git => "https://github.com/shial4/SWindow.git", :tag => s.version.to_s }
-  s.source_files  = "Sources//**/*.swift"
+  s.source_files  = "Sources/**/*.swift"
   s.frameworks  = "UIKit"
 end
