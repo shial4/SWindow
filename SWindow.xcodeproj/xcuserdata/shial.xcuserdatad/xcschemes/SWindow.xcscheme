@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0900"
+   LastUpgradeVersion = "0920"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "62A735A91EDDA1CA008174F2"
+               BlueprintIdentifier = "SWindow::SWindow"
                BuildableName = "SWindow.framework"
                BlueprintName = "SWindow"
                ReferencedContainer = "container:SWindow.xcodeproj">
@@ -44,7 +44,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "62A735A91EDDA1CA008174F2"
+            BlueprintIdentifier = "SWindow::SWindow"
             BuildableName = "SWindow.framework"
             BlueprintName = "SWindow"
             ReferencedContainer = "container:SWindow.xcodeproj">
@@ -67,7 +67,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "62A735A91EDDA1CA008174F2"
+            BlueprintIdentifier = "SWindow::SWindow"
             BuildableName = "SWindow.framework"
             BlueprintName = "SWindow"
             ReferencedContainer = "container:SWindow.xcodeproj">
@@ -85,7 +85,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "62A735A91EDDA1CA008174F2"
+            BlueprintIdentifier = "SWindow::SWindow"
             BuildableName = "SWindow.framework"
             BlueprintName = "SWindow"
             ReferencedContainer = "container:SWindow.xcodeproj">

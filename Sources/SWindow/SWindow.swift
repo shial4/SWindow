@@ -154,6 +154,7 @@ extension SModalPresentation where Self: UIViewController {
         } else {
             SModal.modalWindow.rootViewController = controller
             SModal.makeKey()
+            SModal.modalWindow.alpha = 1
             SModal.modalWindow.isHidden = false
             completion?()
         }
@@ -178,6 +179,7 @@ extension SModalPresentation where Self: UIViewController {
                     completion?()
                 })
             } else {
+                SModal.modalWindow.alpha = 1
                 SModal.modalWindow.isHidden = false
                 completion?()
             }
@@ -205,22 +207,24 @@ extension SModalPresentation where Self: UIViewController {
                 completion?()
             }
         }
-        
-        if SModal.modalWindow.rootViewController === self {
-            if animated {
-                SModal.modalWindow.alpha = 1
-                UIView.animate(withDuration: SModal.animationDuration, animations: {
+        DispatchQueue.main.async {
+            if SModal.modalWindow.rootViewController === self {
+                if animated {
+                    SModal.modalWindow.alpha = 1
+                    UIView.animate(withDuration: SModal.animationDuration, animations: {
+                        SModal.modalWindow.alpha = 0
+                    }, completion: { completed in
+                        SModal.dropRootViewController()
+                        completedProcedure()
+                    })
+                } else {
                     SModal.modalWindow.alpha = 0
-                }, completion: { completed in
                     SModal.dropRootViewController()
                     completedProcedure()
-                })
-            } else {
-                SModal.dropRootViewController()
-                completedProcedure()
+                }
+            } else if SModal.stack.contains(where: { $0 === self }) {
+                SModal.stack = SModal.stack.filter() { !($0 === self) }
             }
-        } else if SModal.stack.contains(where: { $0 === self }) {
-            SModal.stack = SModal.stack.filter() { !($0 === self) }
         }
     }
 }
