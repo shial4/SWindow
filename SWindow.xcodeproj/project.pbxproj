@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		623695BB20B6747A000D7684 /* SWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 623695B020B67170000D7684 /* SWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		OBJ_18 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_24 /* SWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* SWindow.swift */; };
 /* End PBXBuildFile section */
@@ -16,7 +17,7 @@
 		623695B020B67170000D7684 /* SWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWindow.h; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		OBJ_9 /* SWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWindow.swift; sourceTree = "<group>"; };
-		"SWindow::SWindow::Product" /* SWindow.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SWindow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"SWindow::SWindow::Product" /* SWindow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SWindow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,12 +77,24 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		623695BA20B6745C000D7684 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				623695BB20B6747A000D7684 /* SWindow.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		"SWindow::SWindow" /* SWindow */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = OBJ_20 /* Build configuration list for PBXNativeTarget "SWindow" */;
 			buildPhases = (
 				OBJ_23 /* Sources */,
+				623695BA20B6745C000D7684 /* Headers */,
 				OBJ_25 /* Frameworks */,
 			);
 			buildRules = (
