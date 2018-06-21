@@ -142,23 +142,24 @@ extension SModalPresentation where Self: UIViewController {
     ///   - animated: Boolean value idicating if operation should be animated
     ///   - completion: Completion block called on the end of operation
     public func sReplace<T: UIViewController>(with controller: T, animated: Bool = false, completion: (() -> Void)? = nil) where T: SModalPresentation {
-        if animated {
-            SModal.modalWindow.isHidden = false
-            UIView.animate(withDuration: SModal.animationDuration, animations: {
+        DispatchQueue.main.sync {
+            if animated {
+                SModal.modalWindow.isHidden = false
+                UIView.animate(withDuration: SModal.animationDuration, animations: {
+                    SModal.modalWindow.rootViewController = controller
+                    SModal.makeKey()
+                    SModal.modalWindow.alpha = 1
+                }, completion: { completed in
+                    completion?()
+                })
+            } else {
                 SModal.modalWindow.rootViewController = controller
                 SModal.makeKey()
                 SModal.modalWindow.alpha = 1
-            }, completion: { completed in
+                SModal.modalWindow.isHidden = false
                 completion?()
-            })
-        } else {
-            SModal.modalWindow.rootViewController = controller
-            SModal.makeKey()
-            SModal.modalWindow.alpha = 1
-            SModal.modalWindow.isHidden = false
-            completion?()
+            }
         }
-        
     }
     
     /// Default implementation, Object is presented if avaiable or placed in stack. If other object is current presented but can be dissmised SModal is replacing him the next one from stack.
@@ -168,20 +169,22 @@ extension SModalPresentation where Self: UIViewController {
     ///   - completion: Completion block called on the end of operation
     public func sPresent(animated: Bool = false, completion: (() -> Void)? = nil) {
         guard let currentPresented = SModal.modalWindow.rootViewController else {
-            SModal.modalWindow.rootViewController = self
-            SModal.makeKey()
-            if animated {
-                SModal.modalWindow.alpha = 0
-                SModal.modalWindow.isHidden = false
-                UIView.animate(withDuration: SModal.animationDuration, animations: {
+            DispatchQueue.main.sync {
+                SModal.modalWindow.rootViewController = self
+                SModal.makeKey()
+                if animated {
+                    SModal.modalWindow.alpha = 0
+                    SModal.modalWindow.isHidden = false
+                    UIView.animate(withDuration: SModal.animationDuration, animations: {
+                        SModal.modalWindow.alpha = 1
+                    }, completion: { completed in
+                        completion?()
+                    })
+                } else {
                     SModal.modalWindow.alpha = 1
-                }, completion: { completed in
+                    SModal.modalWindow.isHidden = false
                     completion?()
-                })
-            } else {
-                SModal.modalWindow.alpha = 1
-                SModal.modalWindow.isHidden = false
-                completion?()
+                }
             }
             return
         }
@@ -207,7 +210,7 @@ extension SModalPresentation where Self: UIViewController {
                 completion?()
             }
         }
-        DispatchQueue.main.async {
+        DispatchQueue.main.sync {
             if SModal.modalWindow.rootViewController === self {
                 if animated {
                     SModal.modalWindow.alpha = 1
