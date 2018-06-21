@@ -141,7 +141,7 @@ extension SModalPresentation where Self: UIViewController {
     ///   - controller: Controller to replace current presented one
     ///   - animated: Boolean value idicating if operation should be animated
     ///   - completion: Completion block called on the end of operation
-    public func sReplace<T: UIViewController>(with controller: T, animated: Bool = false, completion: (() -> Void)? = nil) where T: SModalPresentation {
+    public func sReplace<T: UIViewController>(with controller: T, animated: Bool = false, completion: (() -> Void)? = nil) {
         DispatchQueue.main.async {
             if animated {
                 SModal.modalWindow.isHidden = false
@@ -169,7 +169,7 @@ extension SModalPresentation where Self: UIViewController {
     ///   - completion: Completion block called on the end of operation
     public func sPresent(animated: Bool = false, completion: (() -> Void)? = nil) {
         guard let currentPresented = SModal.modalWindow.rootViewController else {
-            DispatchQueue.main.async {
+            func presentController() {
                 SModal.modalWindow.rootViewController = self
                 SModal.makeKey()
                 if animated {
@@ -178,6 +178,8 @@ extension SModalPresentation where Self: UIViewController {
                     UIView.animate(withDuration: SModal.animationDuration, animations: {
                         SModal.modalWindow.alpha = 1
                     }, completion: { completed in
+                        SModal.modalWindow.alpha = 1
+                        SModal.modalWindow.isHidden = false
                         completion?()
                     })
                 } else {
@@ -186,11 +188,16 @@ extension SModalPresentation where Self: UIViewController {
                     completion?()
                 }
             }
+            if Thread.isMainThread {
+                presentController()
+            } else {
+                DispatchQueue.main.sync { presentController() }
+            }
             return
         }
         SModal.stack.append(self)
-        if (currentPresented as? SModalPresentation)?.canDismiss == true {
-            (currentPresented as? SModalPresentation)?.sWithdraw(animated: animated, completion: completion)
+        if currentPresented.canDismiss == true {
+            currentPresented.sWithdraw(animated: animated, completion: completion)
         } else {
             completion?()
         }
