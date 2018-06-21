@@ -142,7 +142,7 @@ extension SModalPresentation where Self: UIViewController {
     ///   - animated: Boolean value idicating if operation should be animated
     ///   - completion: Completion block called on the end of operation
     public func sReplace<T: UIViewController>(with controller: T, animated: Bool = false, completion: (() -> Void)? = nil) where T: SModalPresentation {
-        DispatchQueue.main.sync {
+        DispatchQueue.main.async {
             if animated {
                 SModal.modalWindow.isHidden = false
                 UIView.animate(withDuration: SModal.animationDuration, animations: {
@@ -169,7 +169,7 @@ extension SModalPresentation where Self: UIViewController {
     ///   - completion: Completion block called on the end of operation
     public func sPresent(animated: Bool = false, completion: (() -> Void)? = nil) {
         guard let currentPresented = SModal.modalWindow.rootViewController else {
-            DispatchQueue.main.sync {
+            DispatchQueue.main.async {
                 SModal.modalWindow.rootViewController = self
                 SModal.makeKey()
                 if animated {
@@ -210,7 +210,7 @@ extension SModalPresentation where Self: UIViewController {
                 completion?()
             }
         }
-        DispatchQueue.main.sync {
+        DispatchQueue.main.async {
             if SModal.modalWindow.rootViewController === self {
                 if animated {
                     SModal.modalWindow.alpha = 1
