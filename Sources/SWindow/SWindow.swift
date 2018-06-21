@@ -141,7 +141,7 @@ extension SModalPresentation where Self: UIViewController {
     ///   - controller: Controller to replace current presented one
     ///   - animated: Boolean value idicating if operation should be animated
     ///   - completion: Completion block called on the end of operation
-    public func sReplace<T: UIViewController>(with controller: T, animated: Bool = false, completion: (() -> Void)? = nil) {
+    public func sReplace<T: UIViewController>(with controller: T, animated: Bool = false, completion: (() -> Void)? = nil) where T: SModalPresentation {
         DispatchQueue.main.async {
             if animated {
                 SModal.modalWindow.isHidden = false
@@ -196,8 +196,8 @@ extension SModalPresentation where Self: UIViewController {
             return
         }
         SModal.stack.append(self)
-        if currentPresented.canDismiss == true {
-            currentPresented.sWithdraw(animated: animated, completion: completion)
+        if (currentPresented as? SModalPresentation)?.canDismiss == true {
+            (currentPresented as? SModalPresentation)?.sWithdraw(animated: animated, completion: completion)
         } else {
             completion?()
         }
