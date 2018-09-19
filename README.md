@@ -97,7 +97,7 @@ Clone the repo and drag the file `SWindow.swift` into your Xcode project.
 
 **Swift Package Manager:**
 
-Add the line `.Package(url: "https://github.com/shial4/SWindow.git", majorVersion: 0, minor: 1)` to your `Package.swift`
+Add the line `.package(url: "https://github.com/shial4/SWindow.git", from: "0.1.10")` to your `Package.swift`
 
 ## ⭐ Contributing
 

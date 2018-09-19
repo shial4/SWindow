@@ -55,8 +55,8 @@ public class SModal {
     }
     
     /// window level on which should appear on top of windows
-    public static var windowLevel: UIWindowLevel {
-        return UIWindowLevelAlert - 1
+    public static var windowLevel: UIWindow.Level {
+        return UIWindow.Level.alert - 1
     }
     
     /// animation duration used to animated transition between presentations
