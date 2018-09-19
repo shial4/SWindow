@@ -41,7 +41,7 @@ public class SModal {
     static let modalWindow: UIWindow = {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.backgroundColor = .clear
-        window.windowLevel = windowLevel
+        window.windowLevel = UIWindow.Level(windowLevel)
         window.isHidden = true
         return window
     }()
@@ -55,8 +55,8 @@ public class SModal {
     }
     
     /// window level on which should appear on top of windows
-    public static var windowLevel: UIWindow.Level {
-        return UIWindow.Level.alert - 1
+    public static var windowLevel: CGFloat {
+        return UIWindow.Level.alert.rawValue - 1
     }
     
     /// animation duration used to animated transition between presentations
