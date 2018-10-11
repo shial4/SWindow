@@ -83,6 +83,10 @@ public protocol SModalPresentation: class, SModalStack {
     ///   - animated: Boolean value idicating if operation should be animated
     ///   - completion: completion block called after dismiss procedure
     func sWithdraw(animated: Bool, completion: (() -> Void)?)
+    /// animation duration used to animated transition between presentations
+    var animationDuration: TimeInterval { get }
+    /// Boolean value defining if window upon presentation should become a key window.
+    var shouldMakeKey: Bool { get }
 }
 
 // MARK: - Default implementation of Modal Presentation protocol
@@ -111,16 +115,6 @@ extension SModalPresentation {
     /// Default priority set to Required
     public var priority: SModalPriority {
         return .Required
-    }
-    
-    /// animation duration used to animated transition between presentations
-    public var animationDuration: TimeInterval {
-        return 0.2
-    }
-    
-    /// Boolean value defining if window upon presentation should become a key window.
-    public var shouldMakeKey: Bool {
-        return false
     }
 }
 
