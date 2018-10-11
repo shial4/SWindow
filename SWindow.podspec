@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "SWindow"
-  s.version      = "0.1.11"
+  s.version      = "0.1.12"
   s.summary      = "Swift view controller presenter."
   s.description  = <<-DESC
     SWindow is an easy to use Swift windows manager. Don't spend hours writing your code to present and dismiss modal view controllers, stop wasting your time on debugging why your modal presentation disapear. Without issues, simple and safe present your controller!

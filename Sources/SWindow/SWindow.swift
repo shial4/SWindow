@@ -49,33 +49,15 @@ public class SModal {
     /// stack to store controllers in queue
     static var stack: [SModalPresentation] = []
     
-    /// Boolean value defining if window upon presentation should become a key window.
-    public static var shouldMakeKey: Bool {
-        return false
-    }
-    
     /// window level on which should appear on top of windows
     public static var windowLevel: CGFloat {
         return UIWindow.Level.alert.rawValue - 1
-    }
-    
-    /// animation duration used to animated transition between presentations
-    public static var animationDuration: TimeInterval {
-        return 0.2
     }
     
     /// Discard curent root view controller and hide window
     fileprivate static func dropRootViewController() {
         modalWindow.isHidden = true
         modalWindow.rootViewController = nil
-        modalWindow.resignKey()
-    }
-    
-    /// Make our window key window.
-    fileprivate static func makeKey() {
-        if shouldMakeKey {
-            SModal.modalWindow.makeKey()
-        }
     }
 }
 
@@ -130,6 +112,16 @@ extension SModalPresentation {
     public var priority: SModalPriority {
         return .Required
     }
+    
+    /// animation duration used to animated transition between presentations
+    public var animationDuration: TimeInterval {
+        return 0.2
+    }
+    
+    /// Boolean value defining if window upon presentation should become a key window.
+    public var shouldMakeKey: Bool {
+        return false
+    }
 }
 
 
@@ -145,18 +137,22 @@ extension SModalPresentation where Self: UIViewController {
         DispatchQueue.main.async {
             if animated {
                 SModal.modalWindow.isHidden = false
-                UIView.animate(withDuration: SModal.animationDuration, animations: {
+                UIView.animate(withDuration: controller.animationDuration, animations: {
                     SModal.modalWindow.rootViewController = controller
-                    SModal.makeKey()
                     SModal.modalWindow.alpha = 1
                 }, completion: { completed in
+                    if controller.shouldMakeKey {
+                        SModal.modalWindow.makeKey()
+                    }
                     completion?()
                 })
             } else {
                 SModal.modalWindow.rootViewController = controller
-                SModal.makeKey()
                 SModal.modalWindow.alpha = 1
                 SModal.modalWindow.isHidden = false
+                if controller.shouldMakeKey {
+                    SModal.modalWindow.makeKey()
+                }
                 completion?()
             }
         }
@@ -171,11 +167,13 @@ extension SModalPresentation where Self: UIViewController {
         guard let currentPresented = SModal.modalWindow.rootViewController else {
             func presentController() {
                 SModal.modalWindow.rootViewController = self
-                SModal.makeKey()
+                if self.shouldMakeKey {
+                    SModal.modalWindow.makeKey()
+                }
                 if animated {
                     SModal.modalWindow.alpha = 0
                     SModal.modalWindow.isHidden = false
-                    UIView.animate(withDuration: SModal.animationDuration, animations: {
+                    UIView.animate(withDuration: self.animationDuration, animations: {
                         SModal.modalWindow.alpha = 1
                     }, completion: { completed in
                         SModal.modalWindow.alpha = 1
@@ -221,7 +219,7 @@ extension SModalPresentation where Self: UIViewController {
             if SModal.modalWindow.rootViewController === self {
                 if animated {
                     SModal.modalWindow.alpha = 1
-                    UIView.animate(withDuration: SModal.animationDuration, animations: {
+                    UIView.animate(withDuration: self.animationDuration, animations: {
                         SModal.modalWindow.alpha = 0
                     }, completion: { completed in
                         SModal.dropRootViewController()
