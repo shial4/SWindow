@@ -1,6 +1,8 @@
 # SWindow
 
 <p align="center">
+    <img src="https://img.shields.io/badge/Swift-5.0-brightgreen.svg" alt="Language" />
+        </a>
     <a href="https://raw.githubusercontent.com/shial4/SWindow/master/LICENSE">
         <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License" />
     </a>
